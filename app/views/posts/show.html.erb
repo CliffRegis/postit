@@ -1,0 +1,29 @@
+<p class='pull-right'>
+  [<%= link_to 'edit this post', edit_post_path(@post) %>]
+</p>
+
+  <%= render 'shared/content_title', title: @post.title %>
+
+<p>
+  <%= render 'post', post: @post  %>
+</p>
+<hr/>
+
+<%= render 'shared/errors', obj: @comment %>
+
+<div class='span8 well'>
+
+  <%= form_for [@post, @comment] do |f| %>
+    <div class= 'control-group'>
+      <%= f.label "Write a comment" %>
+      <%= f.text_field :body %>
+    </div>
+    <%= f.submit "submit", class: 'btn btn-primary' %>
+  <% end %>
+</div>
+<br>
+
+<p>
+ <%= render 'comments/comment' %>
+</p>
+

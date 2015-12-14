@@ -1,0 +1,14 @@
+<div class='well'>
+  <% @post.comments.each do |comment| %>
+    <ul>
+      <li>
+        <%= comment.body %>
+      </li>
+    </ul>
+    <p>
+      <span class='quiet'> posted by </span> 
+        <%= comment.creator.username %>
+      <small> at <%= display_time(comment.created_at) %></small>
+    </p>
+  <% end %>
+</div>
