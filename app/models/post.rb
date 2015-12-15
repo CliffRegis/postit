@@ -8,7 +8,7 @@ class Post < ActiveRecord::Base
   validates :title, presence: true, length: {minimum: 5}
   has_many :votes, as: :voteable
 
-
+  before_save :generate_slug
 
   def total_votes
     self.vote_up - self.vote_down
@@ -20,6 +20,14 @@ class Post < ActiveRecord::Base
   
   def vote_down
     self.votes.where(vote: false).size
+  end
+
+  def to_param
+    self.slug
+  end
+
+  def generate_slug
+    self.slug = self.title.gsub(" ","-").downcase
   end
 
 end
