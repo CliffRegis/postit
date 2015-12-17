@@ -1,12 +1,14 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: [:show, :edit, :update, :destroy]
   before_action :require_user
+  #before_action :require_admin, only: [:new, :create]
 
   def new
     @category = Category.new
   end
 
-  def show; end
+  def show
+    @category = Category.find_by(slug: params[:id])
+  end
 
   def create
     @category = Category.new(category_params)
@@ -21,23 +23,6 @@ class CategoriesController < ApplicationController
 
   def edit; end
 
-  def update
-    if @category.update(category_params)
-      flash[:notice] = "Successfully updated"
-      redirect_to posts_path
-    else
-      render 'edit'
-    end
-  end
-
-  def destroy
-    if @category.destroy(category_params)
-      flash[:notice] = "You deleted the Category"
-      redirect_to posts_path
-    else
-      render 'edit'
-    end
-  end
 
   private
 
@@ -45,8 +30,5 @@ class CategoriesController < ApplicationController
     params.require(:category).permit(:name)
   end
 
-  def set_category
-    @category = Category.find_by slug: params[:id]
-  end
-
+  
 end

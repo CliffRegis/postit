@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
   before_action :require_same_user, only: [:edit, :update]
+  
 
   def new
     @user = User.new
@@ -24,7 +25,6 @@ class UsersController < ApplicationController
   def edit; end
 
   def update
-
     if @user.update(user_params)
       flash[:notice] = "You editted your profile"
       redirect_to user_path(@user)

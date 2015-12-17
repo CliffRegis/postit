@@ -14,16 +14,17 @@
         <% end %>
       </div>
     <% end %>
+
     <div class='span8 well'>
       <%= render post.categories %>
-     
         <h4><%= link_to post.title, post_path(post) %></h4>
         <p><%= link_to post.url, fix_url(post.url) %></p>
         <p><%= post.description %></p>
         <p>
           <span class='quiet'> posted by </span> 
             <%= post.creator.username %>
-          <small> at <%= display_time(post.created_at) %></small>
+          <span class='quiet'> posted at </span> 
+          <small> <%= display_time(post.created_at) %></small>
         </p>
     </div>
   </div>
